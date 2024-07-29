@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: emergency-management
+  threads:
+    virtual:
+      enabled: true
