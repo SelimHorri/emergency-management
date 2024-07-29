@@ -4,3 +4,17 @@ spring:
   threads:
     virtual:
       enabled: true
+  output:
+    ansi:
+      enabled: always
+  docker:
+    compose:
+      lifecycle-management: start_only
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    sa:
+      sahab:
+        app: TRACE
