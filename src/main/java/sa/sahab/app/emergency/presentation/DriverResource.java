@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import sa.sahab.app.emergency.application.DriverService;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Driver Management", description = "Driver management services")
 @RestController
 @RequestMapping("/drivers")
 @RequiredArgsConstructor
