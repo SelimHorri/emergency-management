@@ -9,7 +9,7 @@ public abstract class BusinessException extends RuntimeException {
 	private final HttpStatus status;
 	private final String message;
 	
-	public BusinessException(HttpStatus status, String message) {
+	protected BusinessException(HttpStatus status, String message) {
 		super(message);
 		this.status = status;
 		this.message = message;
