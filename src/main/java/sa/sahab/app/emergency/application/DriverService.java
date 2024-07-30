@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sa.sahab.app.emergency.domain.entity.Driver;
 import sa.sahab.app.emergency.domain.repository.DriverRepository;
+import sa.sahab.app.emergency.domain.repository.EmergencyCallRepository;
 import sa.sahab.app.emergency.presentation.request.DriverRequest;
 import sa.sahab.app.emergency.presentation.response.DriverResponse;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class DriverService {
 	
 	private final DriverRepository driverRepository;
+	private final EmergencyCallRepository emergencyCallRepository;
 	
 	public List<DriverResponse> findAllDrivers() {
 		return this.driverRepository.findAll()
@@ -60,7 +62,8 @@ public class DriverService {
 	
 	@Transactional
 	public void deleteDriver(UUID id) {
-		this.driverRepository.delete(this.driverRepository.findByIdOrElseThrow(id));
+		this.emergencyCallRepository.deleteAllByDriverId(id);
+		this.driverRepository.deleteById(id);
 	}
 	
 }

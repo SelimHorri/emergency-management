@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sa.sahab.app.emergency.domain.entity.Ambulance;
 import sa.sahab.app.emergency.domain.repository.AmbulanceRepository;
+import sa.sahab.app.emergency.domain.repository.EmergencyCallRepository;
 import sa.sahab.app.emergency.presentation.request.AmbulanceRequest;
 import sa.sahab.app.emergency.presentation.response.AmbulanceResponse;
 
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class AmbulanceService {
 	
 	private final AmbulanceRepository ambulanceRepository;
+	private final EmergencyCallRepository emergencyCallRepository;
 	
 	public List<AmbulanceResponse> findAllAmbulances() {
 		return this.ambulanceRepository.findAll()
@@ -60,6 +62,7 @@ public class AmbulanceService {
 	
 	@Transactional
 	public void deleteAmbulance(UUID id) {
+		this.emergencyCallRepository.deleteAllByAmbulanceId(id);
 		this.ambulanceRepository.deleteById(id);
 	}
 	
