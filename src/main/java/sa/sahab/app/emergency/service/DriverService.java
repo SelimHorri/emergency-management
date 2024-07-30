@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sa.sahab.app.emergency.domain.entity.Driver;
 import sa.sahab.app.emergency.domain.repository.DriverRepository;
-import sa.sahab.app.emergency.infrastructure.exception.ObjectNotFoundException;
 import sa.sahab.app.emergency.presentation.request.DriverRequest;
 import sa.sahab.app.emergency.presentation.response.DriverResponse;
 
@@ -29,7 +28,7 @@ public class DriverService {
 	}
 	
 	public DriverResponse findDriverById(UUID id) {
-		return DriverResponse.from(this.findDriverByIdOrElseThrow(id));
+		return DriverResponse.from(this.driverRepository.findByIdOrElseThrow(id));
 	}
 	
 	@Transactional
@@ -48,7 +47,7 @@ public class DriverService {
 	
 	@Transactional
 	public DriverResponse updateDriver(UUID id, DriverRequest driverRequest) {
-		final var driver = this.findDriverByIdOrElseThrow(id);
+		final var driver = this.driverRepository.findByIdOrElseThrow(id);
 		driver.setName(driverRequest.name());
 		driver.setLicenseNumber(driverRequest.licenseNumber());
 		driver.setPhoneNumber(driverRequest.phoneNumber());
@@ -61,13 +60,7 @@ public class DriverService {
 	
 	@Transactional
 	public void deleteDriver(UUID id) {
-		this.driverRepository.delete(this.findDriverByIdOrElseThrow(id));
-	}
-	
-	private Driver findDriverByIdOrElseThrow(UUID id) {
-		return this.driverRepository.findById(id)
-				.orElseThrow(() -> new ObjectNotFoundException(
-						"Driver with id: %s has not been found".formatted(id.toString())));
+		this.driverRepository.delete(this.driverRepository.findByIdOrElseThrow(id));
 	}
 	
 }
