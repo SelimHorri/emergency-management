@@ -1,4 +1,4 @@
-package sa.sahab.app.emergency.service;
+package sa.sahab.app.emergency.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

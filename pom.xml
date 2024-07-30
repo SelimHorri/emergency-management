@@ -31,6 +31,7 @@
 	
 	<properties>
 		<java.version>21</java.version>
+		<springdoc-version>2.6.0</springdoc-version>
 	</properties>
 	
 	<dependencies>
@@ -84,6 +85,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+			<version>${springdoc-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
