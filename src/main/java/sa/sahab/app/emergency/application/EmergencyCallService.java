@@ -40,7 +40,7 @@ public class EmergencyCallService {
 	@Transactional
 	public EmergencyCallResponse createEmergencyCall(EmergencyCallRequest emergencyCallRequest) {
 		final var emergencyCall = EmergencyCall.builder()
-				.callTime(emergencyCallRequest.callTime())
+				.callerName(emergencyCallRequest.callerName())
 				.callerPhoneNumber(emergencyCallRequest.callerPhoneNumber())
 				.locationAddress(emergencyCallRequest.locationAddress())
 				.description(emergencyCallRequest.description())

@@ -17,16 +17,20 @@ import java.net.URI;
 class HttpExceptionHandler {
 	
 	@ExceptionHandler
-	ResponseEntity<ApiPayload<ProblemDetail>> handleMethodArgumentException(MethodArgumentNotValidException e, HttpServletRequest request) {
-		record InvalidField(String fieldName, String reason) {}
+	ResponseEntity<ApiPayload<ProblemDetail>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+		record InvalidField(String objName, String fieldName, String reason) {}
 		
 		final var invalidFields = e.getBindingResult().getFieldErrors().stream()
-				.map(field -> new InvalidField(field.getField(), field.getDefaultMessage()))
+				.map(field -> new InvalidField(
+						field.getObjectName(),
+						field.getField(),
+						field.getDefaultMessage()))
 				.toList();
 		
-		final var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), e.getMessage());
-		problemDetail.setInstance(URI.create(request.getRequestURI()));
+		final var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), "Request is not valid");
+		problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
 		problemDetail.setProperty("constraintValidations", invalidFields);
+		log.error(problemDetail.toString());
 		
 		return ResponseEntity
 				.status(problemDetail.getStatus())
@@ -48,8 +52,11 @@ class HttpExceptionHandler {
 	
 	@ExceptionHandler
 	ResponseEntity<ApiPayload<ProblemDetail>> handleGeneralException(Exception e, HttpServletRequest request) {
-		final var problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		final var problemDetail = ProblemDetail.forStatusAndDetail(
+				HttpStatus.INTERNAL_SERVER_ERROR, 
+				"An internal error has happen, try after awhile");
 		problemDetail.setInstance(URI.create(request.getRequestURI()));
+		log.error(e.getMessage());
 		log.error(problemDetail.toString());
 		return ResponseEntity
 				.status(problemDetail.getStatus())
