@@ -32,9 +32,7 @@ public class EmergencyCallService {
 	}
 	
 	public EmergencyCallResponse findEmergencyCallById(UUID id) {
-		return this.emergencyCallRepository.findById(id)
-				.map(EmergencyCallResponse::from)
-				.orElseThrow();
+		return EmergencyCallResponse.from(this.emergencyCallRepository.findByIdOrElseThrow(id));
 	}
 	
 	@Transactional
