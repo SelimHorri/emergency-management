@@ -28,6 +28,7 @@ class HttpExceptionHandler {
 				.toList();
 		
 		final var problemDetail = ProblemDetail.forStatusAndDetail(e.getStatusCode(), "Request is not valid");
+		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
 		problemDetail.setInstance(URI.create(request.getRequestURL().toString()));
 		problemDetail.setProperty("constraintValidations", invalidFields);
 		log.error(problemDetail.toString());
@@ -42,6 +43,7 @@ class HttpExceptionHandler {
 		final var problemDetail = ProblemDetail.forStatusAndDetail(
 				e.getStatus(),
 				e.getMessage());
+		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
 		problemDetail.setInstance(URI.create(request.getRequestURI()));
 		log.error(problemDetail.toString());
 		
@@ -55,6 +57,7 @@ class HttpExceptionHandler {
 		final var problemDetail = ProblemDetail.forStatusAndDetail(
 				HttpStatus.INTERNAL_SERVER_ERROR, 
 				"An internal error has happen, try after awhile");
+		problemDetail.setType(URI.create(e.getClass().getSimpleName()));
 		problemDetail.setInstance(URI.create(request.getRequestURI()));
 		log.error(e.getMessage());
 		log.error(problemDetail.toString());

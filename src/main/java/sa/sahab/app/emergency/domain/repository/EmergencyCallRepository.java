@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import sa.sahab.app.emergency.domain.entity.EmergencyCall;
-import sa.sahab.app.emergency.infrastructure.exception.ObjectAlreadyExistsException;
+import sa.sahab.app.emergency.infrastructure.exception.ObjectNotFoundException;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public interface EmergencyCallRepository extends ListCrudRepository<EmergencyCal
 	
 	default EmergencyCall findByIdOrElseThrow(UUID id) {
 		return findById(id)
-				.orElseThrow(() -> new ObjectAlreadyExistsException(
+				.orElseThrow(() -> new ObjectNotFoundException(
 						"Emergency call with id: %s is not found".formatted(id.toString())));
 	}
 	
