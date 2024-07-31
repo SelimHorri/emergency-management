@@ -38,6 +38,10 @@ The application is now runnable using:
 ```bash
 java -jar target/*.jar
 ```
+- Please just make sure you startup the docker compose file manually using :
+```bash
+docker-compose up -d
+```
 
 >> Happy coding :P
 
