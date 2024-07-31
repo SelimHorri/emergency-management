@@ -36,7 +36,7 @@ class EmergencyCallResourceTest {
 	void whenDoFindAll_thenAllEmergencyCallsShouldBeReturned() {
 		this.webTestClient
 				.get()
-				.uri("/ambulances")
+				.uri("/emergency-calls")
 				.exchange()
 				.expectStatus()
 				.isOk()
@@ -45,7 +45,8 @@ class EmergencyCallResourceTest {
 				.jsonPath("$.timestamp").value(notNullValue(Instant.class))
 				.jsonPath("$.status").value(is(ApiPayload.ApiStatus.SUCCESS.name()))
 				.jsonPath("$.responseBody").value(notNullValue())
-				.jsonPath("$.responseBody").isArray();
+				.jsonPath("$.responseBody").isArray()
+				.jsonPath("$.responseBody.size()").isEqualTo(9);
 	}
 	
 }
