@@ -6,11 +6,13 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import sa.sahab.app.AppConstants;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Builder
 public record EmergencyCallRequest(@NotNull(message = "Caller name should not be blank")
 								   @Size(max = 50, message = "Caller name should be {max} at max")
 								   String callerName,
