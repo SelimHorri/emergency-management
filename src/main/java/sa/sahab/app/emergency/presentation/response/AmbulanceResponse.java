@@ -1,10 +1,12 @@
 package sa.sahab.app.emergency.presentation.response;
 
+import lombok.Builder;
 import sa.sahab.app.emergency.domain.entity.Ambulance;
 import sa.sahab.app.emergency.domain.entity.Ambulance.AmbulanceStatus;
 
 import java.util.UUID;
 
+@Builder
 public record AmbulanceResponse(UUID id,
 								String licensePlate,
 								AmbulanceStatus status,
