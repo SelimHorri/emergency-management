@@ -2,3 +2,5 @@ spring:
   docker:
     compose:
       enabled: false
+  datasource:
+    url: jdbc:tc:postgresql:16-alpine:///emergency_test_db

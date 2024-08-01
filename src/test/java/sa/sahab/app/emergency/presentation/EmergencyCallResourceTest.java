@@ -6,13 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 import sa.sahab.app.AppConstants;
 import sa.sahab.app.emergency.presentation.request.EmergencyCallRequest;
 import sa.sahab.app.emergency.presentation.response.ApiPayload;
@@ -27,13 +22,8 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-@Testcontainers
 @Rollback
 class EmergencyCallResourceTest {
-	
-	@Container
-	@ServiceConnection
-	private static final PostgreSQLContainer<?> POSTGRES = new PostgreSQLContainer<>(DockerImageName.parse("postgres:16-alpine"));
 	
 	@Autowired
 	private WebTestClient webTestClient;
