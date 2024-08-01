@@ -167,4 +167,16 @@
 		</plugins>
 	</build>
 	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<mainActiveProfile>dev</mainActiveProfile>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+	
 </project>

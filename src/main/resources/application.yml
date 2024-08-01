@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: @mainActiveProfile@
   application:
     name: emergency-management
   threads:
@@ -7,16 +9,17 @@ spring:
   output:
     ansi:
       enabled: always
-#  mvc:
-#    problemdetails:
-#      enabled: true
   docker:
     compose:
+      profiles:
+        active: @mainActiveProfile@
       lifecycle-management: start_only
   jpa:
     show-sql: true
   flyway:
-    locations: classpath:db/migration/{vendor}
+    locations:
+      - classpath:db/migration/{vendor}
+      - classpath:db/migration/{vendor}/@mainActiveProfile@
 
 logging:
   level:
