@@ -14,6 +14,10 @@ spring:
       profiles:
         active: @mainActiveProfile@
       lifecycle-management: start_only
+  datasource:
+    url: jdbc:postgresql://localhost:5432/emergency_db
+    username: postgres
+    password: postgres
   jpa:
     show-sql: true
   flyway:
