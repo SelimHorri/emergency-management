@@ -2,10 +2,10 @@
 
 This project uses Spring Boot 3.1.x or higher; and can be run in dev mode simply by hitting:
 ```bash
-./mvnw clean spring-boot:run.
+./mvnw clean spring-boot:run
 ```
 
-- The application with spin up a Postgres container from `compose.yml` file in the root of the project and leave it running.
+- The application will spin up a Postgres container (when starting up) from `compose.yml` file in the root of the project and leave it running.
 
 - The schema will be initialized within the container with some dummy data, using Flyway migrations.
 
@@ -38,11 +38,11 @@ The application is now runnable using:
 ```bash
 java -jar target/*.jar
 ```
-- Please just make sure you startup the docker compose file manually using :
+- Please just make sure you startup the docker compose file manually before running JAR file using :
 ```bash
 docker-compose up -d
 ```
 
->> Happy coding :P
+> Happy coding :P
 
 
