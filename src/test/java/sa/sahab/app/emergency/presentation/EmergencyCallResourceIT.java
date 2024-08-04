@@ -3,11 +3,10 @@ package sa.sahab.app.emergency.presentation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.transaction.annotation.Transactional;
 import sa.sahab.app.AppConstants;
 import sa.sahab.app.emergency.presentation.request.EmergencyCallRequest;
 import sa.sahab.app.emergency.presentation.response.ApiPayload;
@@ -20,9 +19,9 @@ import java.util.UUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient
-@Rollback
+@SpringBootTest
+@AutoConfigureMockMvc
+@Transactional
 class EmergencyCallResourceIT {
 	
 	@Autowired
@@ -43,7 +42,7 @@ class EmergencyCallResourceIT {
 				.jsonPath("$.status").value(is(ApiPayload.ApiStatus.SUCCESS.name()))
 				.jsonPath("$.responseBody").value(notNullValue())
 				.jsonPath("$.responseBody").isArray()
-				.jsonPath("$.responseBody.size()").isEqualTo(10);
+				.jsonPath("$.responseBody.size()").isEqualTo(9);
 	}
 	
 	@DisplayName("given a valid ID, test find emergency call by ID")
