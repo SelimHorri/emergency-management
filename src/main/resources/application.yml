@@ -13,7 +13,9 @@ spring:
     compose:
       profiles:
         active: @mainActiveProfile@
-      lifecycle-management: start_only
+      lifecycle-management: start_and_stop
+      stop:
+        command: down
   datasource:
     url: jdbc:postgresql://localhost:5432/emergency_db
     username: postgres
