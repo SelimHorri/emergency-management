@@ -23,9 +23,9 @@ sdk env
 ```
 
 ### Running the Application
-You can run your application that enables live coding with (Spring DevTools) using:
+You can run your application that enables live coding with `Spring DevTools` & `Testcontainers` using:
 ```bash
-./mvnw clean spring-boot:run
+./mvnw clean spring-boot:test-run
 ```
 
 ### Packaging and Running the Application
